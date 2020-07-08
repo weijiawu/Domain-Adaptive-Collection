@@ -38,9 +38,9 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 
 - **[10] ICCV2019"A Robust Learning Approach to Domain Adaptive Object Detection" 基于faster rcnn**
 
-使用model pretrained only在source domain产生a set of noisy bounding box作为noisy label对target domain进行监督学习。这篇文章其实很简单，主要有三个机制：**1、模型先用labled source domain训练一下，然后在****target domain上产生noisy label（很多地方叫做pseudo-label）2、训一个classifier对第一阶段产生的pseudo-label进行打分。 3、使用产生的noisy label对网络进行监督学习****
+使用model pretrained only在source domain产生a set of noisy bounding box作为noisy label对target domain进行监督学习。这篇文章其实很简单，主要有三个机制：**1、模型先用labled source domain训练一下，然后在target domain上产生noisy label（很多地方叫做pseudo-label）2、训一个classifier对第一阶段产生的pseudo-label进行打分。 3、使用产生的noisy label对网络进行监督学习**
 
-- **[11] CVPR2019 "Expl****oring object relation in mean teacher for cross-domain detection."基于faster rcnn.**
+- **[11] CVPR2019 "Exploring object relation in mean teacher for cross-domain detection."基于faster rcnn.**
 
 **(这篇的related work可以作为参考写论文，因为都是从合成数据迁移到真实场景数据上的应用)**
 **3D CAD --->   real data.**为了使得model能从合成数据集迁移到真实场景的数据集上，该论文中提出了一种 Mean Teacher with Object Relations (MTOR)的网络结构。idea来源于[12], 基于faster rcnn将object relations加入了consistency cost进行域的更好的迁移。具体实现是：使用source domain(labed)对网络进行训练，在处理target domain的时候，将target image转化成两种带有噪声的image(调整灰度，对比度等)，然后分布对这两张图做预测，对预测后的结果做**three consistency regularization：**
@@ -55,7 +55,7 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 
 - **[13] Pedestrian detection with unsupervised multispectral feature learning using deep neural networks**
 
-**提出了一个自动标注的网络结构，迭代的在visible和thermal形式上面进行标注，**利用多光谱数据中的互补信息。这个自动标注流程主要分为三个阶段：
+**提出了一个自动标注的网络结构，迭代的在visible和thermal形式上面进行标注**，利用多光谱数据中的互补信息。这个自动标注流程主要分为三个阶段：
 1、迭代标注         2、时间追踪          3、label fusion。 
 
 
@@ -131,7 +131,7 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 
 代码：[https://github.com/harsh-99/SCL](https://github.com/harsh-99/SCL)
 
-**关键词：****gradient detach based ，stacked complementary losses (SCL) **
+**关键词：gradient detach based ，stacked complementary losses (SCL) **
 
 为了解决domain-shift，论文中提出了一个a gradient detach based stacked complementary losses (SCL)，在论文中作者认为[14]虽然用了更多不同level的loss function去学习discriminative representation, 但是忽略了不同loss的交互和兼容，因此论文提出了**SCL（使用了multiple complementary losses）**去更好的帮助网络优化学习更多的discriminative representation。
 
@@ -255,7 +255,7 @@ Chen, Y.C.; Lin, Y.Y.; Yang, M.H.; Huang, J.B. CrDoCo: Pixel-Level Domain Transf
 
 代码：[https://github.com/YunChunChen/CrDoCo-pytorch](https://github.com/YunChunChen/CrDoCo-pytorch)
 
-**关键词： “image-to- image translation”  ， “****cross- domain consistency loss****”
+**关键词： “image-to- image translation”  ， “cross- domain consistency loss**”
 
 **更详细可以参考我的另一篇笔记---->  **
 
@@ -265,7 +265,7 @@ Chen, Y.C.; Lin, Y.Y.; Yang, M.H.; Huang, J.B. CrDoCo: Pixel-Level Domain Transf
 
 代码：[https://github.com/ZJULearning/MaxSquareLoss](https://github.com/ZJULearning/MaxSquareLoss)
 
-**关键词： “maximum squares loss****”**
+**关键词： “maximum squares loss”**
 
 **更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/wx7qh1](https://www.yuque.com/weijiawu/research/wx7qh1)
 
