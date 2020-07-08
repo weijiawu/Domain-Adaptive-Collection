@@ -1,15 +1,22 @@
 # 域迁移(Domain Adaptive)
 
 域自适应综述：  
+
 Li, W., Li, F., Luo, Y., & Wang, P. (2020). **Deep Domain Adaptive Object Detection: a Survey**. _arXiv preprint arXiv:2002.06797_.
+
 Wang, Mei, and Weihong Deng. "**Deep visual domain adaptation: A survey.**" _Neurocomputing_ 312 (2018): 135-153.
+
 Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupervised Domain Adaptation in Semantic Segmentation: a Review**
-**
+
 关键词:   Deep domain adaptive object detection (DDAOD), few-shot, unsupervised， **domain-invariant feature**
+
 ## 背景
-**Domain**** shift是不可避免对于目标检测在真实场景的运用中。例如，在自动驾驶中，很多真实场景环境都不可能在训练集中被观察到、场景文本检测中很多街景，或者户外户内场景不会出现在训练集中，因此解决domain shift是十分有意义的。**
+**Domain shift是不可避免对于目标检测在真实场景的运用中。例如，在自动驾驶中，很多真实场景环境都不可能在训练集中被观察到、场景文本检测中很多街景，或者户外户内场景不会出现在训练集中，因此解决domain shift是十分有意义的**
+
 域自适应解决两个问题：
+
 （1）目前DP依赖大量的labeled data的问题，现实工业运用不可能都有大量的labeled 数据。
+
 （2）training数据和testing数据要求具有相同的分布。这是很难实现的，对于cnn及其依赖数据，换个场景performance可能就不太好。
 
 针对上面两个问题，对于从source domain上训练好的模型迁移到target domain场景下是值得探究的，这个过程叫做domain adaptive。然后因为不同domain数据的分布不同，造成了在target domain上面的表现效果极差，这叫domain shift。
@@ -276,31 +283,58 @@ Chen, Y.C.; Lin, Y.Y.; Yang, M.H.; Huang, J.B. CrDoCo: Pixel-Level Domain Transf
 
 ## References
 
-[1] Kim, S., Choi, J., Kim, T., & Kim, C. (2019).** Self-training and adversarial background regularization for unsupervised domain adaptive one-stage object detection.** In _Proceedings of the IEEE International Conference on Computer Vision_ (pp. 6092-6101).
+[1] Kim, S., Choi, J., Kim, T., & Kim, C. (2019).**Self-training and adversarial background regularization for unsupervised domain adaptive one-stage object detection.** In _Proceedings of the IEEE International Conference on Computer Vision_ (pp. 6092-6101).
+
 [2] Saito, K., Yamamoto, S., Ushiku, Y., & Harada, T. (2018). Open set domain adaptation by backpropagation. In _Proceedings of the European Conference on Computer Vision (ECCV)_ (pp. 153-168).
+
 [3] Li, Wanyi, Fuyu Li, Yongkang Luo, and Peng Wang. "Deep Domain Adaptive Object Detection: a Survey." _arXiv preprint arXiv:2002.06797_ (2020).
-[4] Özgen, Azmi Can, Mandana Fasounaki, and Hazim Kemal Ekenel. "T**ext detection in natural and computer-generated images**." In _2018 26th Signal Processing and Communications Applications Conference (SIU)_, pp. 1-4. IEEE, 2018.
+
+[4] Özgen, Azmi Can, Mandana Fasounaki, and Hazim Kemal Ekenel. **Text detection in natural and computer-generated images**." In _2018 26th Signal Processing and Communications Applications Conference (SIU)_, pp. 1-4. IEEE, 2018.
+
 [5] Chen, Ting, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. "**A simple framework for contrastive learning of visual representation**s." _arXiv preprint arXiv:2002.05709_ (2020).
+
 [6] Ma, Chixiang, Lei Sun, Zhuoyao Zhong, and Qiang Huo. "R**eLaText: Exploiting Visual Relationships for Arbitrary-Shaped Scene Text Detection with Graph Convolutional Networks.**" _arXiv preprint arXiv:2003.06999_ (2020).
+
 [7] He, Kaiming, Haoqi Fan, Yuxin Wu, Saining Xie, and Ross Girshick. "**Momentum contrast for unsupervised visual representation learning**." _arXiv preprint arXiv:1911.05722_ (2019).
+
 [8] Ganin, Yaroslav, and Victor Lempitsky. "**Unsupervised domain adaptation by backpropagation**." _arXiv preprint arXiv:1409.7495_ (2014).
+
 [10] M. Khodabandeh, A. Vahdat, M. Ranjbar, and W. G. Macready, "**A Robust Learning Approach to Domain Adaptive Object Detection**," arXiv preprint arXiv:1904.02361, 2019.
+
 [11] Cai, Q., Pan, Y., Ngo, C. W., Tian, X., Duan, L., & Yao, T. (2019). **Exploring object relation in mean teacher for cross-domain detection.** In _Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition_ (pp. 11457-11466).
+
 [12] Geoffrey French, Michal Mackiewicz, and Mark Fisher. **Self-ensembling for domain adaptation**. In ICLR, 2018.
+
 [13] Y. Cao, D. Guan, W. Huang, J. Yang, Y. Cao, and Y. Qiao, "**Pedestrian detection with unsupervised multispectral feature learning using deep neural networks," **information fusion, vol. 46, pp. 206-217, 3/1/2019 2019.
+
 [14] Y. Chen, W. Li, C. Sakaridis, D. Dai, and L. Van Gool, "**Domain Adaptive Faster R-CNN for Object Detection in the Wild," computer vision and pattern recognition**, pp. 3339-3348, 2018
+
 [15] Zhu, Xinge, Jiangmiao Pang, Ceyuan Yang, Jianping Shi, and Dahua Lin. "**Adapting object detectors via selective cross-domain alignment.**" In _Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition_, pp. 687-696. 2019.
+
 [16] T. Wang, X. Zhang, L. Yuan, and J. Feng, "**Few-shot Adaptive Faster R-CNN,**" in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 7173-7182.
+
 [17] K. Saito, Y. Ushiku, T. Harada, and K. Saenko, "**Strong-Weak Distribution Alignment for Adaptive Object Detection**," in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 6956-6965
+
 [18] Z. He and L. Zhang, "**Multi-Adversarial Faster-RCNN for Unrestricted Object Detection**," presented at the International Conference on Computer Vision, 2019.
+
 [19] Z. Shen, H. Maheshwari, W. Yao, and M. Savvides, "**SCL: Towards Accurate Domain Adaptive Object Detection via Gradient Detach Based Stacked Complementary Losses**," ed, 2019
+
 [20] H. Zhang, Y. Tian, K. Wang, H. He, and F.-Y. Wang, "**Synthetic-to-Real Domain Adaptation for Object Instance Segmentation,**" in 2019 International Joint Conference on Neural Networks (IJCNN), 2019, pp. 1- 7.
+
 [21] C. Zhuang, X. Han, W. Huang, and M. R. Scott, "**iFAN: Image- Instance Full Alignment Networks for Adaptive Object Detection**," in AAAI Conference on Artificial Intelligence (AAAI), 2020
+
 [22] V. F. Arruda, T. M. Paixão, R. F. Berriel, A. F. D. Souza, C. Badue, N. Sebe, et al., "**Cross-Domain Car Detection Using Unsupervised Image-to- Image Translation: From Day to Night**," in 2019 International Joint Conference on Neural Networks (IJCNN), 2019, pp. 1-8
+
 [23] C. Lin, "**Cross Domain Adaptation for on-Road Object Detection Using Multimodal Structure-Consistent Image-to-Image Translation**," in 2019 IEEE International Conference on Image Processing (ICIP), 2019, pp. 3029-3030
+
 [24] Ganin, Y.; Ustinova, E.; Ajakan, H.; Germain, P.; Larochelle, H.; Laviolette, F.; Marchand, M.; Lempitsky, V. **Domain-adversarial training of neural networks 2016**. 17, 2096–2030.
+
 [25] Tzeng, E.; Hoffman, J.; Saenko, K.; Darrell, T. **Adversarial discriminative domain adaptation**. Proc. of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 7167–7176.
+
 [26] Hoffman, J.; Wang, D.; Yu, F.; Darrell, T. **FCNs in the wild: Pixel-level adversarial and constraint-based adaptation**. arXiv preprint arXiv:1612.02649 2016
+
 [27] Chen, Y.C.; Lin, Y.Y.; Yang, M.H.; Huang, J.B. CrDoCo: **Pixel-Level Domain Transfer With Cross-Domain Consistency**. Proc. of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019
+
 [28] Chen, M.; Xue, H.; Cai, D.** Domain Adaptation for Semantic Segmentation With Maximum Squares Loss**. Proc. of International Conference on Computer Vision (ICCV), 2019
+
 [29] Vu, T.H.; Jain, H.; Bucher, M.; Cord, M.; Pérez, P. **Advent: Adversarial entropy minimization for domain adaptation in semantic segmentation**. Proc. of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 2517–2526.
