@@ -35,24 +35,25 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 
 ### Discrepancy-based
 主要使用**fine-tune进行域迁移**
-**
 
 - **[10] ICCV2019"A Robust Learning Approach to Domain Adaptive Object Detection" 基于faster rcnn**
 
-使用model pretrained only在source domain产生a set of noisy bounding box作为noisy label对target domain进行监督学习。这篇文章其实很简单，主要有三个机制：**1、模型先用labled source domain训练一下，然后在****target domain上产生noisy label（很多地方叫做pseudo-label）****2、训一个classifier对第一阶段产生的pseudo-label进行打分。 3、使用产生的noisy label对网络进行监督学习。**
-**
+使用model pretrained only在source domain产生a set of noisy bounding box作为noisy label对target domain进行监督学习。这篇文章其实很简单，主要有三个机制：**1、模型先用labled source domain训练一下，然后在****target domain上产生noisy label（很多地方叫做pseudo-label）2、训一个classifier对第一阶段产生的pseudo-label进行打分。 3、使用产生的noisy label对网络进行监督学习****
 
-- **[11] CVPR2019 "****Expl****oring object relation in mean teacher for cross-domain detection."基于faster rcnn.**
+- **[11] CVPR2019 "Expl****oring object relation in mean teacher for cross-domain detection."基于faster rcnn.**
 
 **(这篇的related work可以作为参考写论文，因为都是从合成数据迁移到真实场景数据上的应用)**
-**3D CAD --->   real data. ****  **为了使得model能从合成数据集迁移到真实场景的数据集上，该论文中提出了一种 Mean Teacher with Object Relations (MTOR)的网络结构。idea来源于[12], 基于faster rcnn将object relations加入了consistency cost进行域的更好的迁移。具体实现是：使用source domain(labed)对网络进行训练，在处理target domain的时候，将target image转化成两种带有噪声的image(调整灰度，对比度等)，然后分布对这两张图做预测，对预测后的结果做**three consistency regularization： **
-1) Region-Level Consistency to align the region-level predictions between teacher and student;   直接对检测区域做比较的正则
-2) Inter-Graph consistency for matching the graph structures between teacher and student          对object 的关系做比较的正则
-3) Intra-Graph Consistency to enhance the similarity between regions of same class within the graph of student.       和student的同类的关系graph对其做相似性。
-总结：**该论文使用了mean teacher去解决domain gap，对object的context做consistency regularization。**
-**
+**3D CAD --->   real data.**为了使得model能从合成数据集迁移到真实场景的数据集上，该论文中提出了一种 Mean Teacher with Object Relations (MTOR)的网络结构。idea来源于[12], 基于faster rcnn将object relations加入了consistency cost进行域的更好的迁移。具体实现是：使用source domain(labed)对网络进行训练，在处理target domain的时候，将target image转化成两种带有噪声的image(调整灰度，对比度等)，然后分布对这两张图做预测，对预测后的结果做**three consistency regularization：**
 
-- **[13] ****Pedestrian detection with unsupervised multispectral feature learning using deep neural networks**
+1) Region-Level Consistency to align the region-level predictions between teacher and student;   直接对检测区域做比较的正则
+
+2) Inter-Graph consistency for matching the graph structures between teacher and student          对object 的关系做比较的正则
+
+3) Intra-Graph Consistency to enhance the similarity between regions of same class within the graph of student.       和student的同类的关系graph对其做相似性。
+
+总结：**该论文使用了mean teacher去解决domain gap，对object的context做consistency regularization。**
+
+- **[13] Pedestrian detection with unsupervised multispectral feature learning using deep neural networks**
 
 **提出了一个自动标注的网络结构，迭代的在visible和thermal形式上面进行标注，**利用多光谱数据中的互补信息。这个自动标注流程主要分为三个阶段：
 1、迭代标注         2、时间追踪          3、label fusion。 
@@ -62,74 +63,91 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 ---
 
 
----
-
 ### Adversarial-based
+
 **Adversarial-based方式主要利用domain classifier进行对抗训练，想得到一个domain confusion的结果，学习domain-invariant 的feature.**
+
 具体可以参考一篇比较早的论文  [8] ICML 2015的一篇论文提出**Gradient Reversal Layer（GRL）去学习**domain-invariant feature -----**[Unsupervised Domain Adaptation by Backpropagation](https://www.yuque.com/weijiawu/skxqc2/agzefg)。**
 
 
 - **[14] Domain Adaptive Faster R-CNN for Object Detection in the Wild
 
 论文：[https://arxiv.org/abs/1803.03243](https://arxiv.org/abs/1803.03243)
+
 代码：[https://github.com/krumo/Domain-Adaptive-Faster-RCNN-PyTorch](https://github.com/krumo/Domain-Adaptive-Faster-RCNN-PyTorch)
-（有开源代码，好好读一读。。。）
-**关键词： ** **H-divergence  ，  domain classifier  ,   consistency regularization**
-这CVPR2018的一篇工作，为了解决domain shift这一个问题，论文中认为domain shift主要发生在** ****image level和instance level**层面上，因此提出了两个在image level和instance level的components的机制去**最小化在两个domain之间的H- divergence**。具体在每个component之中，主要训练一个domain classifier去学习一个domain-invariant features。
-**更详细可以参考我的另一篇笔记---->  **[https://www.yuque.com/weijiawu/research/mpsw2x](https://www.yuque.com/weijiawu/research/mpsw2x)
+
+**关键词： H-divergence  ，  domain classifier  ,   consistency regularization**
+
+这CVPR2018的一篇工作，为了解决domain shift这一个问题，论文中认为domain shift主要发生在**image level和instance level**层面上，因此提出了两个在image level和instance level的components的机制去**最小化在两个domain之间的H-divergence**。具体在每个component之中，主要训练一个domain classifier去学习一个domain-invariant features。
+
+**更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/mpsw2x](https://www.yuque.com/weijiawu/research/mpsw2x)
 
 
-- **[15] ****Adapting object detectors via selective cross-domain alignment**
+- **[15] Adapting object detectors via selective cross-domain alignment**
 
 论文：[链接](http://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Adapting_Object_Detectors_via_Selective_Cross-Domain_Alignment_CVPR_2019_paper.pdf)
+
 代码：[https://github.com/xinge008/SCDA](https://github.com/xinge008/SCDA)
-（有开源代码，好好读一读。。。）
-**关键词： “****where to look”  ， “how to align”****   ，    ** 
+
+**关键词： “where to look”  ， “how to align”** 
+
 论文中认为使用GRL直接对齐整个image是不合适的对于detection任务来说，object detection任务是focuses on local regions的，因此论文中提出了一种方式去解决哪里需要align和如何去align。
-**更详细可以参考我的另一篇笔记---->  **[https://www.yuque.com/weijiawu/research/cgcd23](https://www.yuque.com/weijiawu/research/cgcd23)
+
+**更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/cgcd23](https://www.yuque.com/weijiawu/research/cgcd23)
 
 
 - **[16] Few-shot Adaptive Faster R-CNN**
 
 **关键词：image-level ,   instance level  ,  feature pairing mechanism  ,  strong regularization**
-这是一篇CVPR2019的工作，为了解决domain shift的问题，论文中提出了一种few-shot的处理方式，**只需要少量的target domain数据和标注就能完成很好的域迁移工作****。 其主要包含两个level（又是image-level和instance-level呗）：**（1）一个基于image-level的split pooling机制对齐local patch上的特征。（2）instance-level在语义上面对齐object feature，避免了类内confusion。最后还有一个a source model feature regularization (SMFR)去稳定域迁移。
+
+这是一篇CVPR2019的工作，为了解决domain shift的问题，论文中提出了一种few-shot的处理方式，**只需要少量的target domain数据和标注就能完成很好的域迁移工作。 其主要包含两个level（又是image-level和instance-level呗）：**（1）一个基于image-level的split pooling机制对齐local patch上的特征。（2）instance-level在语义上面对齐object feature，避免了类内confusion。最后还有一个a source model feature regularization (SMFR)去稳定域迁移。
 
 
 - **[17] Strong-Weak Distribution Alignment for Adaptive Object Detection**
 
 论文：[链接](http://openaccess.thecvf.com/content_CVPR_2019/papers/Saito_Strong-Weak_Distribution_Alignment_for_Adaptive_Object_Detection_CVPR_2019_paper.pdf)
+
 代码：[https://github.com/VisionLearningGroup/DA_Detection](https://github.com/VisionLearningGroup/DA_Detection)
-（有开源代码，好好读一读。。。）
-**关键词： “weak global alignment”  ， “strong local alignment”   ， **
+
+**关键词： “weak global alignment”  ， “strong local alignment”**
+
 主要提出了一个strong local alignment和一个weak global alignment的概念去更好的实现域迁移工作。
+
 作者认为在object detection中，不同的domain有不同的场景层次分布，所以使用GRL进行域迁移时候应该有侧重点，对于object区域（domain-invariant feature比较多的情况下）**应该进行strong alignment，对于global应该进行weak alignment。**
-**更详细可以参考我的另一篇笔记---->  **[https://www.yuque.com/weijiawu/research/iun9eb](https://www.yuque.com/weijiawu/research/iun9eb)
+
+**更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/iun9eb](https://www.yuque.com/weijiawu/research/iun9eb)
 
 
 - **[18] Multi-Adversarial Faster-RCNN for Unrestricted Object Detection**
 
 **关键词：multi-adversarial  ,  hierarchical domain feature alignment ,   aggregated proposal feature alignment**
+
 为了解决domain-shift，论文中提出了一个multi-adversarial Faster- RCNN (MAF) framework：（1）.首先提出了一个多层次的domain feature对齐模块（a hierarchical domain feature alignment module）（2）.一个information invariant scale reduction module (SRM)被提出去提高adversarial domain adaptation的效率。（3）为了提升模型的域迁移能力，提出了一个weighted gradient reversal layer (WGRL)去有差别的对待feature alignments，解决那些hard confused domain samples。
 
 
 - **[19] SCL: Towards Accurate Domain Adaptive Object Detection via Gradient Detach Based Stacked Complementary Losses**
 
 论文：[https://arxiv.org/pdf/1911.02559.pdf](https://arxiv.org/pdf/1911.02559.pdf)
+
 代码：[https://github.com/harsh-99/SCL](https://github.com/harsh-99/SCL)
-**关键词：****gradient detach based ****stacked complementary losses (SCL) **
-（有开源代码，好好读一读。。。）
+
+**关键词：****gradient detach based ，stacked complementary losses (SCL) **
+
 为了解决domain-shift，论文中提出了一个a gradient detach based stacked complementary losses (SCL)，在论文中作者认为[14]虽然用了更多不同level的loss function去学习discriminative representation, 但是忽略了不同loss的交互和兼容，因此论文提出了**SCL（使用了multiple complementary losses）**去更好的帮助网络优化学习更多的discriminative representation。
 
 - **[20] Synthetic-to-Real Domain Adaptation for Object Instance Segmentation**
 
 **关键词：global- level    ，   local-level    ，  subtle-level mask**
+
 （也是从合成数据集到真实场景数据集的域迁移，可以借鉴）
+
 论文中提出了一种从合成数据集迁移到真实场景数据集的域迁移方式，为了解决domain shift，提出了三种不同level的迁移机制：global level,  local-level,  和 subtle - level mask层次的域自适应。
 
 
 - **[21] iFAN: Image- Instance Full Alignment Networks for Adaptive Object Detection**
 
-**关键词：****image-level alignment  ， full alignment exploits**
+**关键词：image-level alignment  ， full alignment exploits**
+
 为了能更好的进行域迁移，解决domain shift问题，论文中提出了下面两个alignments: (1)、image-level： 多种尺寸的features在对抗方式下进行对齐。   （2）、Full instance-level alignment: 充分利用了深层的语义信息和实例表示，可以在类别和域之间建立关系。
 
 
@@ -146,14 +164,18 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 - **[22] Cross-Domain Car Detection Using Unsupervised Image-to- Image Translation: From Day to Night**
 
 论文：[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8852008](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8852008)
+
 代码：[https://github.com/LCAD-UFES/publications-arruda-ijcnn-2019](https://github.com/LCAD-UFES/publications-arruda-ijcnn-2019)
+
 **关键词：CycleGAN    ,      day-time domain to night-time domain.**
+
 论文中为了能试自动驾驶中白天的场景域迁移到晚上，使用了CycleGAN去产生一个合成数据集from day-time domain to night-time domain，最后检测模型训练在fake 数据集上。
 
 
 - **[23] Cross Domain Adaptation for on-Road Object Detection Using Multimodal Structure-Consistent Image-to-Image Translation**
 
-**关键词：****multi-modal****    ,      ****diverse and structure-preserved translated images**
+**关键词：multi-modal  ,  diverse and structure-preserved translated images**
+
 介绍了一种多模式结构一致的图像到图像转换模型，以实现领域自适应车辆检测。
 
 
@@ -163,13 +185,12 @@ Marco Toldo, Andrea Maracani, Umberto Michieli  and Pietro Zanuttigh. **Unsupe
 
 - **[1] [Self-Training and Adversarial Background Regularization for Unsupervised Domain Adaptive One-Stage Object Detection](https://www.yuque.com/weijiawu/skxqc2/hnlhct)**
 
-**关键词：****WST  ， BSR**
+**关键词：WST ，BSR**
+
 CVPR2019oral基于SSD的域迁移目标检测,提出了**WST和BSR进行解决domain shift------**
 
 
 **更详细可以参考我的另一篇笔记---->  [Self-Training and Adversarial Background Regularization for Unsupervised Domain Adaptive One-Stage Object Detection](https://www.yuque.com/weijiawu/skxqc2/hnlhct)**
-**
-**
 
 ---
 
@@ -189,7 +210,9 @@ CVPR2019oral基于SSD的域迁移目标检测,提出了**WST和BSR进行解决do
 ---
 
 ## UDASS(Unsupervised Domain Adaptation in Semantic Segmentation)
+
 资源：
+
 [Awesome-Domain-Adaptation](https://github.com/jarvisWang0903/Awesome-Domain-Adaptation/blob/45fc9b6537a8edff656521a6acc5b13fa7b08f06/doc/Semantic%20Segmentation.md)
 
 在域迁移过程中按照source domain和target domain的类别不同可以分为以下几种情况：
@@ -197,59 +220,68 @@ CVPR2019oral基于SSD的域迁移目标检测,提出了**WST和BSR进行解决do
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/353459/1591163755817-5cf6f7d2-6c64-489c-8387-6b0a301d8c7f.png#align=left&display=inline&height=728&margin=%5Bobject%20Object%5D&name=image.png&originHeight=728&originWidth=1486&size=722721&status=done&style=none&width=1486)
 
 - **Closed Set DA**：source domain和target domain中的categories是相同的。
+
 - **Partial DA**：target domain中的categories是source domian中的子集。
+
 - **Open Set DA**：source domain 中的categories是target domain中的子集。
+
 - **Open-Partial DA：**source 和target domain有交集的categories，但又有只属于自己的categories。
+
 - **Boundless DA：**an Open Set DA where all the target domain categories are learned individually
 
 
 
 下面是几种用于分割域迁移中的方式：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/353459/1591166625517-ba35bb27-dce4-4fe2-b17b-b27e962dd329.png#align=left&display=inline&height=851&margin=%5Bobject%20Object%5D&name=image.png&originHeight=851&originWidth=1407&size=626301&status=done&style=none&width=1407)
+
 ### Weakly- and Semi- Supervised Learning 
-
-
-
 
 ### Domain Adversarial Discriminative
 
 
 - Ganin, Y.; Ustinova, E.; Ajakan, H.; Germain, P.; Larochelle, H.; Laviolette, F.; Marchand, M.; Lempitsky, V.** Domain-adversarial training of neural networks** 2016. 17, 2096–2030.
+
 - Tzeng, E.; Hoffman, J.; Saenko, K.; Darrell, T. **Adversarial discriminative domain adaptation**. Proc. of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 7167–7176.
+
 - Hoffman, J.; Wang, D.; Yu, F.; Darrell, T. **FCNs in the wild: Pixel-level adversarial and constraint-based adaptation**. arXiv preprint arXiv:1612.02649 2016
 
 Chen, Y.C.; Lin, Y.Y.; Yang, M.H.; Huang, J.B. CrDoCo: Pixel-Level Domain Transfer With Cross-Domain Consistency. Proc. of IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.
 
 
-
-
 - **[27] Pixel-Level Domain Transfer With Cross-Domain Consistency**
 
 论文：[https://arxiv.org/abs/2001.03182](https://arxiv.org/abs/2001.03182)
-代码：[https://github.com/YunChunChen/CrDoCo-pytorch](https://github.com/YunChunChen/CrDoCo-pytorch)
-（有开源代码，好好读一读。。。）
-**关键词： “image-to- image translation”  ， “****cross- domain consistency loss****” ****  ， **
-**更详细可以参考我的另一篇笔记---->  **
 
+代码：[https://github.com/YunChunChen/CrDoCo-pytorch](https://github.com/YunChunChen/CrDoCo-pytorch)
+
+**关键词： “image-to- image translation”  ， “****cross- domain consistency loss****”
+
+**更详细可以参考我的另一篇笔记---->  **
 
 - **[28] Domain Adaptation for Semantic Segmentation with Maximum Squares Loss**
 
 论文：[https://arxiv.org/pdf/1909.13589.pdf](https://arxiv.org/pdf/1909.13589.pdf)
+
 代码：[https://github.com/ZJULearning/MaxSquareLoss](https://github.com/ZJULearning/MaxSquareLoss)
-（有开源代码，好好读一读。。。）
-**关键词： “****maximum squares loss****”  **
-**更详细可以参考我的另一篇笔记---->  **[https://www.yuque.com/weijiawu/research/wx7qh1](https://www.yuque.com/weijiawu/research/wx7qh1)
+
+**关键词： “maximum squares loss****”**
+
+**更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/wx7qh1](https://www.yuque.com/weijiawu/research/wx7qh1)
 
 
 - **[29] Advent: Adversarial entropy minimization for domain adaptation in semantic segmentation**.
 
 论文：[https://arxiv.org/pdf/1811.12833.pdf](https://arxiv.org/pdf/1811.12833.pdf)
+
 代码：[https://github.com/valeoai/ADVENT](https://github.com/valeoai/ADVENT)
-（有开源代码，好好读一读。。。）
-**关键词： “****entropy of the pixel-wise****” :   1. entropy loss     2.adversarial loss**
+
+**关键词： “entropy of the pixel-wise” :   1. entropy loss     2.adversarial loss**
+
 为了解决domain gap，更好的实现domain之间的分割域迁移，论文中提出了一种the entropy ofthe pixel-wise predictions，主要有两部分**1. entropy loss     2.adversarial loss**可以帮助分割网络进行更好的域迁移
-**更详细可以参考我的另一篇笔记---->  **[https://www.yuque.com/weijiawu/research/hkw6ru](https://www.yuque.com/weijiawu/research/hkw6ru)
-**
+
+**更详细可以参考我的另一篇笔记---->**[https://www.yuque.com/weijiawu/research/hkw6ru](https://www.yuque.com/weijiawu/research/hkw6ru)
+
 
 
 
